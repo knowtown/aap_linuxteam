@@ -1,6 +1,7 @@
 ---
 - name: test out community.general.mail
-  hosts: all
+  hosts: localhost
+  #hosts: all
   gather_facts: true
   tasks:
     - name: Example playbook sending mail to root
