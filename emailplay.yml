@@ -1,0 +1,7 @@
+---
+- name: test out community.general.mail
+  hosts: localhost
+  #hosts: all
+  gather_facts: true
+  roles:
+    - emailtest 
