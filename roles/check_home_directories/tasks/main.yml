@@ -1,0 +1,28 @@
+[200~---
+- name: check home dirs
+  hosts: bvlucrashtw01
+  gather_facts: yes
+
+  tasks:
+    - name: get homedirs
+      find:
+        paths: /home
+        file_type: directory
+      register: home_dirs
+
+    - name: show dirs
+      vars:
+        user_name: "{{ item.path | basename }}"
+      blockinfile:
+        path: /usr/local/logs/validation.{{ ansible_hostname }}.testoutput
+        block: " {{ ansible_facts.hostname }} home dir is not owned by user"
+        insertbefore:
+        marker: "---------------- {mark} check_home_directories.yml --------------------"
+#      when: user_name != item.pw_name
+#      debug:
+#        msg: "home dir is {{ item.path }} owner should be {{ user_name }} owner is {{ item.pw_name }}"
+      loop: "{{ home_dirs.files }}"
+#      when: user_name != item.pw_name
+
+#    - name: find owners from home_dirs name
+#      debug:

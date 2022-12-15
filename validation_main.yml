@@ -1,0 +1,13 @@
+---
+- name: Playbook to validate configurations on Linux host
+  hosts: "{{ srvr_name }}"
+  become: true
+  gather_facts: true
+  roles:
+    - {role: create_log, tags: validation}
+    - {role: add_cstnxpse, tags: validation}
+    - {role: check_defender, tags: validation}
+#    - {role: check_cron, tags: validation}
+#    - {role: check_changewindow, tags: validation}
+#    - {role: check_exports, tags: validation}
+#    - {role: check_home_directories, tags: validation}

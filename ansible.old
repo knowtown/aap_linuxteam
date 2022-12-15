@@ -4,6 +4,10 @@ timeout = 30
 forks = 400
 strategy = free
 
+[privilege_escalation]
+become_user = ansible
+become_method = sudo
+
 [ssh_connection]
 scp_if_ssh = True
 retries = 5

@@ -1,0 +1,3 @@
+---
+# vars file for validation
+EXCEPTIONS_FILE: /usr/ust/etc/validation-exceptions

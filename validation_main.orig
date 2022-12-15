@@ -1,0 +1,58 @@
+---
+# add a line
+# Playbook that calls the roles which should run all the roles
+- hosts: "{{ srvr_name }}"
+  become: true
+  gather_facts: true
+  roles:
+    - role: "create_log"
+  tags:
+    - "validation"
+  
+- hosts: "{{ srvr_name }}"
+  become: true
+  gather_facts: true
+  roles:
+    - role: "add_cstnxpse"
+  tags:
+    - "validation"
+
+- hosts: "{{ srvr_name }}"
+  become: true
+  gather_facts: true
+  roles:
+    - role: "check_defender"
+  tags:
+    - "validation"
+
+- hosts: "{{ srvr_name }}"
+  become: true
+  gather_facts: true
+  roles:
+    - role: "check_cron"
+  tags:
+    - "validation"
+
+- hosts: "{{ srvr_name }}"
+  become: true
+  gather_facts: true
+  roles:
+    - role: "check_changewindow"
+  tags:
+    - "validation"
+
+- hosts: "{{ srvr_name }}"
+  become: true
+  gather_facts: true
+  roles:
+    - role: "check_exports"
+  tags:
+    - "validation"
+
+- hosts: "{{ srvr_name }}"
+  become: true
+  gather_facts: true
+  roles:
+    - role: "check_home_directories"
+  tags:
+    - "validation"

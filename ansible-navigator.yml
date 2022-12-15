@@ -1,0 +1,9 @@
+---
+ansible-navigator:
+  ansible:
+    config:
+      path: ~knowtown/ansible.cfg
+  editor:
+    command: /usr/bin/vim
+  playbook-artifact:
+    enable: false

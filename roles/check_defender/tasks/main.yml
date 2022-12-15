@@ -1,0 +1,24 @@
+---
+- name: check exceptions
+  shell: 'grep  "^skip-defender:.*{{ ansible_facts.hostname }}" /usr/ust/etc/validation-exceptions >/dev/null 2>&1'
+  ignore_errors: true
+  register: exception_found
+
+- block:
+
+  - name: check if defender is installed when there's no exception
+    package_facts:
+      manager: "auto"
+
+  - name: write check defender to log
+    blockinfile:
+      path: /usr/local/logs/validation.{{ ansible_hostname }}.testoutput
+      block: " MS Defender not found and {{ ansible_hostname }} not in exceptions"
+      insertbefore:
+      marker: "---------------- {mark} check_defender.yml --------------------"  
+
+  - :
+      msg: "defender is installed already"
+    when: "'mdatp' in ansible_facts.packages"
+
+  when: exception_found.rc != 0   

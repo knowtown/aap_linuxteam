@@ -1,0 +1,13 @@
+[200~---
+- name: get machinedb rec
+  shell: 'grep -E "(:){{ ansible_facts.hostname }}(:)" /usr/ust/databases/machine.db | grep -v ^# | cut -d: -f 40'
+  register: chg_window
+- debug: var=chg_window
+
+- name: write check change window entry to log if chg_window not found
+  blockinfile:
+    path: /usr/local/logs/validation.{{ ansible_hostname }}.testoutput
+    block: " {{ ansible_facts.hostname }} has nothing in change window field in CMDB"
+    insertbefore:
+    marker: "---------------- {mark} check_changewindow.yml --------------------"
+  when: chg_window.stdout == ""

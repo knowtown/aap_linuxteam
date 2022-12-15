@@ -1,0 +1,29 @@
+---
+#- name: confirm cstnxpse account
+#  tasks:
+  - name: add nexpose group
+    group:
+      name: nexpose
+      gid: 41125
+      state: present
+    register: group_result
+
+  - name: add cstnxpse account
+    user:
+      name: cstnxpse
+      uid: 127061
+      comment: Nexpose Account Unix
+      password: '*K*'
+      group: nexpose
+      state: present
+      expires: -1
+      password_expire_max: -1
+      password_expire_min: -1
+    register: account_result
+
+  - name: write add_cstnxpse to log
+    blockinfile:
+      path: /usr/local/logs/validation.{{ ansible_hostname }}.testoutput
+      block: " Group {{ group_result.changed }} , Account {{ account_result.changed }}"
+      insertbefore:
+      marker: "---------------- {mark} add_cstnxpse.yml --------------------"

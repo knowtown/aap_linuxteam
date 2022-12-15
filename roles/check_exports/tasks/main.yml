@@ -1,0 +1,20 @@
+---
+- name: get nbr of lines in /etc/exports
+  shell: "/bin/grep -v '^#' /etc/exports | /usr/bin/wc -l | /usr/bin/awk '{print $1}'"
+  register: nbr_exports
+- name: Echo nbr_exports var
+  debug: var=nbr_exports.stdout
+
+- name: get nbr of exported file systems using showmount -e
+  shell: "/usr/sbin/showmount -e 2>/dev/null | /usr/bin/wc -l | /usr/bin/awk '{print $1}'"
+  register: nbr_nfs_fs
+- name: Echo nbr_nfs_fs var
+  debug: var=nbr_nfs_fs.stdout
+  
+- name: write check exports entry to log if nbr_exports and nbr_nfs_fs not greater than 0
+  blockinfile:
+    path: /usr/local/logs/validation.{{ ansible_hostname }}.testoutput
+    block: " {{ ansible_facts.hostname }} /etc/exports has entries, NFS shows no exports or is not running"
+    insertbefore:
+    marker: "---------------- {mark} check_exports.yml --------------------"
+  when: nbr_nfs_fs.stdout == "0" and nbr_exports.stdout != "0"
