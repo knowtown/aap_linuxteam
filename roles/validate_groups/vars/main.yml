@@ -1,0 +1,9 @@
+---
+# This vars file holds the vars dictionary for required groups
+linux_groups:
+  - name: ustadmin
+    gid: 5278
+    state: present
+  - name: wrongadmin
+    gid: 5600
+    state: absent

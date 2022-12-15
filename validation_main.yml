@@ -5,9 +5,12 @@
   gather_facts: true
   roles:
     - {role: create_log, tags: validation}
-    - {role: add_cstnxpse, tags: validation}
-    - {role: check_defender, tags: validation}
+#    - {role: add_cstnxpse, tags: validation}
+#    - {role: check_defender, tags: validation}
 #    - {role: check_cron, tags: validation}
 #    - {role: check_changewindow, tags: validation}
 #    - {role: check_exports, tags: validation}
 #    - {role: check_home_directories, tags: validation}
+#    - {role: validate_packages, tags: validation}
+#    - {role: validate_groups, tags: validation}
+    - {role: validate_users, tags: validation}

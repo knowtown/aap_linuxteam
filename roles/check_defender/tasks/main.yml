@@ -17,7 +17,8 @@
       insertbefore:
       marker: "---------------- {mark} check_defender.yml --------------------"  
 
-  - :
+  - name: Print exectution results
+    debug:
       msg: "defender is installed already"
     when: "'mdatp' in ansible_facts.packages"
 

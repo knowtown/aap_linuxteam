@@ -1,0 +1,25 @@
+---
+# this vars file holds the list of local users to validate
+# add users and state as needed
+linux_users:
+  - name: unixcfg
+    uid: 1040
+    group: ustadmin
+    comment: "default linux/ansible admin account"
+    home: /home/unixcfg
+    shell: /bin/bash
+    state: present
+  - name: satremusr
+    uid: 128385
+    group: users
+    comment: "Satellite Remote Execution User"
+    home: /home/satremusr
+    shell: /bin/bash
+    state: present
+  - name: invaliduser
+    uid: 130000
+    group: users
+    comment: "A sample invalid user"
+    home: /home/invaliduser
+    shell: /bin/bash
+    state: absent

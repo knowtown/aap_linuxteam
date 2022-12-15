@@ -1,0 +1,9 @@
+---
+# This role will validate the local groups on the linux servers
+# Add groups to validate in the vars/main.yml file
+- name: Validate {{ item.name }} group status
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+    state: "{{ item.state }}"
+  with_items: "{{ linux_groups }}"

@@ -1,0 +1,12 @@
+---
+# A sample of validating users
+- name: Validate the {{ item.name }} user status
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid }}"
+    group: "{{ item.group }}"
+    comment: "{{ item.comment }}"
+    home: "{{ item.home }}"
+    shell: "{{ item.shell }}"
+    state: "{{ item.state }}"
+  with_items: "{{ linux_users }}"

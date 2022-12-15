@@ -1,0 +1,8 @@
+---
+# This file holds the vars for packages names to validate
+# To add an rpm package to the list just add it to the dictionary below.
+# This first test will validate the mailx package similar to the check_mailx validatio script
+package_names:
+  - mailx
+#  - mdatp
+#  -open-vm-tools
