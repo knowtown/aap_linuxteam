@@ -5,5 +5,8 @@ ansible-navigator:
       path: ~knowtown/ansible.cfg
   editor:
     command: /usr/bin/vim
+  execution-environment:
+    container-engine: podman
+    enabled: False
   playbook-artifact:
     enable: false
