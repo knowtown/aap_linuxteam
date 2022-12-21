@@ -9,7 +9,14 @@
 #    var: ansible_facts.packages
 
 - name: "Check if packages are installed"
+  ignore_errors: True
   debug:
-    msg: "{{ ansible_facts.packages[item], omit }}"
+    msg: "{{ item }} is installed on {{ inventory_hostname }}"
+  when: item in ansible_facts.packages
   loop: "{{ package_names }}"
-  
+
+- name: "Print packages NOT installed"
+  debug:
+    msg: "{{ item }} is not installed on {{ inventory_hostname }}"
+  when: item is not in ansible_facts.packages
+  loop: "{{ package_names }}"
